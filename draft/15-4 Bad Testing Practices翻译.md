@@ -132,7 +132,15 @@ Stubbing 私有方法和测试私有方法具有相同的警告，但是更重�
 
 应该做什么：测试中，依靠伞 stubbing 来替代那个库的全部功能。
 
-stubbing 伞(一个我刚刚发明的术语)
+stubbing 伞(一个我刚刚发明的术语)包括 stubbing out 所有你的代码可能用到的方式。
+
+正如上面的那个例子，你的代码今天可能依赖于"HTTP 库 A"，但是还是有别的可能的方式发起 HTTP 请求，不是么？比如"HTTP 库 B"
+
+作为一个例子，一个为网络代码提供 stubbing 伞的解决方案是我的开源项目，[Nocilla](https://github.com/luisobo/Nocilla)。通过 [Nocilla](https://github.com/luisobo/Nocilla)你可以不依赖任何 HTTP 库，以声明的方式 stub HTTP 请求。 [Nocilla](https://github.com/luisobo/Nocilla)关心 stubbing 的任何一个 HTTP 库，所以你不用双倍测试任何实现细节。这使得你能够在不修改测试的情况下切换网络栈。
+
+另一个例子是 stubbing out 时间，在大多数编程语言中都有很多中方法获取当前时间，但是像 [TUDelorean](https://github.com/tuenti/TUDelorean) 这样的库关心 stubbing 每一个与时间相关的 API，所以你可以模仿一个不同的系统时间用来测试。这使得你不用修改测试就可以重构不同的时间 API 的实现细节。
+
+除了 HTTP 或者时间，在拥有各种各样 API 的其他领域，你可以用类似的方式来 stubbing 伞，或者你可以创建你自己的开源解决方案并分享到社区，这样其他人就可以正确地编写测试了。
 
 ###如果你去除(Stub Out)了一个依赖，那么请正确地使用
 注：stub——人为地让一个对象对某个方法返回我们事先规定好的值
